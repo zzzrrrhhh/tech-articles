@@ -4,8 +4,9 @@
 https://zzzrrrhhh.github.io/tech-articles/
 
 - 仓库：https://github.com/zzzrrrhhh/tech-articles （public）
-- 默认真分支：`main`，合并到 `main` 后由 GitHub Actions 自动构建并部署
+- 默认且**唯一**分支：`master`，推送到 `master` 后由 GitHub Actions 自动构建并部署
 - 本地工作副本：`/Users/bl_osd/tech-articles`
+- 发布方式是**直接在 `master` 上提交**：不建新分支、不开 PR；`master` 已关闭分支保护，可直接 push
 
 ## 目录结构
 
@@ -17,9 +18,10 @@ https://zzzrrrhhh.github.io/tech-articles/
 | `archetypes/default.md` | `hugo new` 用的原型 |
 | `templates/article-template.md` | 手写新稿时复制的模板 |
 | `scripts/new-article.sh` | 生成草稿到 `drafts/` |
-| `scripts/publish-pr.sh` | 草稿 → `content/posts/` → 建分支推送 → 自动开 PR |
-| `scripts/merge-pr.sh` | 按 PR 号合并（API）→ 删已合并分支 → 回读核验 |
-| `.github/workflows/hugo.yml` | 构建 + 部署 GitHub Pages |
+| `scripts/publish.sh` | **标准发布**：草稿 → `content/posts/<slug>/index.md` → 提交并直推 `master` |
+| `scripts/publish-pr.sh` | 遗留：走分支 + PR 的旧流程，当前不用（`master` 已无分支保护） |
+| `scripts/merge-pr.sh` | 遗留：按 PR 号合并，当前不用 |
+| `.github/workflows/hugo.yml` | 构建 + 部署 GitHub Pages（触发分支 `master`） |
 
 ## 文章格式
 
@@ -41,14 +43,13 @@ author: zhangronghui
 ## 发布流程
 
 1. `bash scripts/new-article.sh "文章标题" slug` 生成 `drafts/YYYY-MM-DD-slug.md`，写正文。
-2. 审核通过后：`bash scripts/publish-pr.sh drafts/YYYY-MM-DD-slug.md`
-   该脚本会复制到 `content/posts/<slug>/index.md`、建 `post/<slug>` 分支、提交、推送，并用 API 开 PR。
-3. 在 PR 里复核 diff，然后合并到 `main`：
-   - 网页按钮，或 `bash scripts/merge-pr.sh <PR号>`（走 API 合并、自动删分支、回读核验）
-   - `main` 已开分支保护（`enforce_admins=true`），**直接 `git push` 到 main 会被拒**（`GH006: Changes must be made through a pull request`），只能通过 PR 合并
-4. 合并后 GitHub Actions 自动 `hugo --minify` 构建并部署到 Pages，通常 1 分钟内生效。
+   （自动化流水线里草稿由上游步骤生成，可以放在仓库外——`publish.sh` 会把它一并归档进 `drafts/`）
+2. 审核通过后：`bash scripts/publish.sh <草稿路径>`
+   该脚本复制到 `content/posts/<slug>/index.md`、归档草稿、提交，并**直接推送 `master`**（不建分支、不开 PR）。
+3. 推送后 GitHub Actions 自动 `hugo --minify` 构建并部署到 Pages，通常 1 分钟内生效。
 
-> 部署只由 `main` 的 push 触发，所以「合并」就是发布动作——PR 没合并，站点不会变。
+> 部署只由 `master` 的 push 触发，所以「push 到 `master`」就是发布动作。
+> 仓库只保留 `master` 一个分支；`master` 已关闭分支保护，允许直接 push（不再需要 PR）。
 
 ## 本地预览（可选）
 
