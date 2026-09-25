@@ -97,6 +97,7 @@ d=json.loads(sys.argv[1])
 print('PR 已创建：', d.get('url') or d) if 'url' in d else print('创建 PR 失败：', d)
 " "$PR_JSON"
 
+PR_NUM=$(printf '%s' "$PR_JSON" | python3 -c "import sys,json;print(json.load(sys.stdin).get('number',''))")
 echo
-echo "下一步：复核 PR diff，然后合并（合并即发布）："
-echo "  git switch main && git pull && git merge --no-ff $BRANCH && git push"
+echo "下一步：复核 PR diff 后合并（合并即发布，main 有分支保护，不能直接 push）："
+echo "  bash scripts/merge-pr.sh ${PR_NUM:-<PR号>}"
