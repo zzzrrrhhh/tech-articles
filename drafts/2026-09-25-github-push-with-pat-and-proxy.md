@@ -1,11 +1,8 @@
 ---
 title: 打通本机 GitHub 推送：PAT、代理与 credential helper
 date: 2026-09-25
-status: draft
 tags: [github, git, 工程实践, macos]
-summary: 用 personal access token 让终端里的 git clone/push 不再要密码：分清 token 放在哪个变量、为什么 github.com 直连超时、以及不落盘新密钥的 credential helper 怎么写。
-channels: []
-published_at:
+author: zhangronghui
 ---
 
 # 打通本机 GitHub 推送：PAT、代理与 credential helper

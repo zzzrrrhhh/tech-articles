@@ -1,12 +1,8 @@
 ---
 title: 文章标题写这里
 date: 2026-01-01
-updated:
-status: draft
 tags: []
-summary: 一句话摘要，用于列表页展示和推送邮件正文开头。
-channels: []
-published_at:
+author: zhangronghui
 ---
 
 # 文章标题写这里

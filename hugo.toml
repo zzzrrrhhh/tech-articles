@@ -1,0 +1,65 @@
+baseURL = 'https://zzzrrrhhh.github.io/tech-articles/'
+locale = 'zh-cn'
+defaultContentLanguage = 'zh'
+title = '技术专栏'
+theme = 'PaperMod'
+paginate = 10
+enableRobotsTXT = true
+hasCJKLanguage = true
+enableEmoji = true
+
+[params]
+  env = 'production'
+  description = '工程实践、排障记录与可复现的验证方法'
+  author = 'zhangronghui'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  ShowWordCount = true
+
+[params.homeInfoParams]
+  Title = '技术专栏'
+  Content = '''
+工程实践与排障记录：每个结论都带可复现的命令和实测输出。
+'''
+
+[[params.socialIcons]]
+  name = 'github'
+  url = 'https://github.com/zzzrrrhhh'
+
+[menu]
+  [[menu.main]]
+    identifier = 'posts'
+    name = '文章'
+    url = '/posts/'
+    weight = 10
+  [[menu.main]]
+    identifier = 'tags'
+    name = '标签'
+    url = '/tags/'
+    weight = 20
+  [[menu.main]]
+    identifier = 'archives'
+    name = '归档'
+    url = '/archives/'
+    weight = 30
+  [[menu.main]]
+    identifier = 'search'
+    name = '搜索'
+    url = '/search/'
+    weight = 40
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']

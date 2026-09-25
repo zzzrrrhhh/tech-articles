@@ -22,4 +22,4 @@ sed -e "s/^title: .*/title: ${TITLE}/" \
     "$TPL" > "$FILE"
 
 echo "已创建：$FILE"
-echo "下一步：编辑正文 → 审核(status: review) → 发布 → 移到 published/ 并更新 README 索引"
+echo "下一步：写正文 → 审核通过后跑 scripts/publish-pr.sh $FILE（会开 PR，合并 main 后自动部署）"

@@ -7,6 +7,11 @@
 .vscode/
 *.swp
 
+# Hugo 构建产物
+public/
+resources/_gen/
+.hugo_build.lock
+
 # 临时产物
 *.tmp
 *.bak
