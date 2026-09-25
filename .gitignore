@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+._*
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 临时产物
+*.tmp
+*.bak
+node_modules/
