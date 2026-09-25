@@ -29,7 +29,7 @@ REPO_DRAFT="drafts/$BASE"
 echo "草稿   : $DRAFT"
 echo "标题   : $TITLE"
 echo "目标   : $TARGET"
-echo "分支   : $BRANCH（直推，不建新分支）"
+echo "分支   : ${BRANCH}（直推，不建新分支）"
 
 # 同步到远端最新，避免非快进
 git fetch -q origin "$BRANCH"
